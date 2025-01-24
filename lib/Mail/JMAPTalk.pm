@@ -100,6 +100,11 @@ Authentication Options: (basic auth)
  * user => $username
  * password => $password
 
+Other Options:
+
+ * SSL_options => a hashref of SSL options to pass down to the default user
+   agent
+
 Request Defaults:
 
  * using => \@urns (default ['urn:ietf:params:jmap:core', 'urn:ietf:params:jmap:mail'])
@@ -135,7 +140,8 @@ e.g.
 sub ua {
   my $Self = shift;
   unless ($Self->{ua}) {
-    $Self->{ua} = HTTP::Tiny->new(agent => $AGENT);
+    $Self->{ua} = HTTP::Tiny->new(agent => $AGENT,
+                                  SSL_options => $Self->{SSL_options});
   }
   return $Self->{ua};
 }
