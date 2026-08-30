@@ -7,10 +7,24 @@ WriteMakefile(
     PREREQ_PM         => {
         'MIME::Base64'    => 0,
         'JSON'            => 0,
-        'File::LibMagic' => 0,
-        'HTTP::Tiny'     => 0,
-    }, # e.g., Module::Name => 1.1
+        'HTTP::Tiny'      => 0,
+    },
+    TEST_REQUIRES     => {
+        'Test::More'      => 0,
+    },
     ABSTRACT_FROM     => 'lib/Mail/JMAPTalk.pm', # retrieve abstract from module
     AUTHOR            => 'Bron Gondwana <brong@cpan.org>',
     LICENSE           => 'Perl_5',
+    META_MERGE        => {
+        'meta-spec' => { version => 2 },
+        prereqs => {
+            runtime => {
+                # only needed to guess the type of an Upload() with no
+                # explicit mimetype; needs the C libmagic library
+                recommends => {
+                    'File::LibMagic' => 0,
+                },
+            },
+        },
+    },
 );

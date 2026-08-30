@@ -8,7 +8,6 @@ package Mail::JMAPTalk;
 use HTTP::Tiny;
 use JSON;
 use MIME::Base64;
-use File::LibMagic;
 use Carp qw(confess);
 use Data::Dumper;
 
@@ -514,6 +513,10 @@ sub Call {
 sub _get_type {
   my $data = shift;
   # XXX - escape file names?
+  # File::LibMagic is optional - it needs the C libmagic library, and every
+  # known caller passes an explicit type anyway, so only load it if we're
+  # actually asked to guess.
+  return 'application/octet-stream' unless eval { require File::LibMagic; 1 };
   my $magic = File::LibMagic->new();
   my $info = $magic->info_from_string($data);
   return $info->{mime_type};
@@ -524,8 +527,12 @@ sub _get_type {
 If the first argument is a hash reference, it will be shifted
 and used as additional headers.
 
-Uploads the bytes in $data with either the given mimetype or
-if the mimetype is not given, the type picked by File::LibMagic.
+Uploads the bytes in $data with either the given mimetype or, if the
+mimetype is not given, the type picked by File::LibMagic.
+
+File::LibMagic is optional.  If it isn't installed, an unspecified
+mimetype falls back to "application/octet-stream", so pass $mimetype
+explicitly if you care what the blob is typed as.
 
 The POST request is authenticated with either the basic auth
 parameters given at creation, or the token obtained via Login.
