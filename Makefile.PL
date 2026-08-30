@@ -11,8 +11,6 @@ WriteMakefile(
         'HTTP::Tiny'     => 0,
     }, # e.g., Module::Name => 1.1
     ABSTRACT_FROM     => 'lib/Mail/JMAPTalk.pm', # retrieve abstract from module
-    AUTHOR            => 'Bron Gondwana <brong@>',
-    #LICENSE           => 'perl',
-    #Value must be from legacy list of licenses here
-    #http://search.cpan.org/perldoc?Module%3A%3ABuild%3A%3AAPI
+    AUTHOR            => 'Bron Gondwana <brong@cpan.org>',
+    LICENSE           => 'Perl_5',
 );
