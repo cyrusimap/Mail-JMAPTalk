@@ -7,7 +7,7 @@ package Mail::JMAPTalk;
 
 use HTTP::Tiny;
 use JSON;
-use Convert::Base64;
+use MIME::Base64;
 use File::LibMagic;
 use Carp qw(confess);
 use Data::Dumper;

@@ -4,6 +4,7 @@ Revision history for Perl extension Mail::JMAPTalk.
     - clarify licensing: same terms as Perl itself (Artistic License 1.0
       or GPL version 1 or later)
     - include a LICENSE file in the distribution
+    - use core MIME::Base64 instead of Convert::Base64
     - uncomment LICENSE => Perl_5 in Makefile.PL (metadata previously
       said "unknown")
 
